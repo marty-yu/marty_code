@@ -1,0 +1,67 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node 
+{
+	int age;
+	struct node* next;
+};
+
+struct node* createlink();
+void print(struct node* p);
+
+int main(void)
+{
+	struct node* pt;
+	pt = createlink();
+	print(pt);
+
+	return 0;
+}
+
+struct node* createlink()
+{
+	int num;
+	int age;
+
+	struct node* head = NULL;
+	struct node* p1 = NULL;
+	struct node* p2 = NULL;
+	//创建头结点
+	p1 = (struct node*)malloc(sizeof(struct node));
+	
+	//初始化头结点
+	p1->next = NULL;
+
+	head = p2 = p1;//注意赋值顺序！！p1有地址才可以赋给后面的
+
+	printf("请输入想要创建的链表数量：");
+	scanf_s("%d", &num);
+
+	for (int i = 0; i < num; i++)
+	{
+		printf("请输入年龄：");
+		scanf_s("%d", &age);
+
+		//创建新节点
+		p1 = (struct node*)malloc(sizeof(struct node));
+
+		//赋值
+		p1->age = age;
+		p2->next = p1;
+		p1->next = NULL;
+		p2 = p1;
+	}
+	return head;
+}
+
+void print(struct node* head)
+{
+	struct node* p2 = head->next;
+
+	printf("链表中的所有参数为：\n");
+	while (p2!= NULL)
+	{
+		printf("%d\n", p2->age);
+		p2 = p2->next;
+	}
+}
